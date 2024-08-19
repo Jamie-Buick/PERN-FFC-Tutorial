@@ -1,1 +1,1 @@
-Tutorial found here: git push [--seeam origin maint-upstr](https://www.youtube.com/watch?v=ldYcgPKEZC8)
+Tutorial found here: git push [PERN Tutorial from Free Code Camp](https://www.youtube.com/watch?v=ldYcgPKEZC8)

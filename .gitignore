@@ -136,3 +136,7 @@ public/
 
 # Snowpack build output
 web_modules/
+
+
+#db details
+server/db.js

@@ -63,7 +63,43 @@ app.get("/todos/:id", async(req, res) => {
 
 //Update a todo
 
+app.put("/todos/:id", async (req, res) => {
+    try
+    {
+        const {id} = req.params;
+        const {description} = req.body;
+        const updateToDo = await db.query(
+            "UPDATE todo SET description=$1 where WHERE todo_id=$2", 
+            [description, id]
+        );
+
+        res.json("Todo was updated");
+    }
+    catch(err)
+    {
+        console.error(err.message);
+    }
+
+});
+
 //Delete a todo
+
+app.delete("/todos/:id" , async(req,res) => {
+    try 
+    {
+        const {id} = req.params;
+        const deleteToDo = await db.query(
+            "DELETE FROM todo WHERE todo_id=$1",
+            [id]
+        );
+        res.json("Todo was deleted");
+    } 
+    catch (err) 
+    {
+        console.error(err.message);
+    }
+
+});
 
 
 app.listen(5000,() => {

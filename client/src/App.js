@@ -1,9 +1,18 @@
 import './App.css';
-import React, { Fragement } from "react";
+import React, { Fragment } from 'react';
+
+//components
+import InputToDo from "./Components/InputToDo";
+
 
 function App() {
   return (
-    <Fragement></Fragement>
+    <Fragment>
+      <div className="container">
+        <InputToDo/>
+      </div>
+      
+    </Fragment>
   );
 }
 

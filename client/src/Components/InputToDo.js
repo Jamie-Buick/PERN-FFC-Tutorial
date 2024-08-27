@@ -15,7 +15,7 @@ const onSubmitForm = async e => {
             body : JSON.stringify(body)
        });
 
-       console.log(response);
+       window.location ="/";
 
     } 
     catch (err)

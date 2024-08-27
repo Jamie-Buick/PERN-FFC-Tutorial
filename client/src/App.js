@@ -3,6 +3,8 @@ import React, { Fragment } from 'react';
 
 //components
 import InputToDo from "./Components/InputToDo";
+import ListToDos from "./Components/ListToDo";
+
 
 
 function App() {
@@ -10,6 +12,8 @@ function App() {
     <Fragment>
       <div className="container">
         <InputToDo/>
+        <ListToDos/>
+        
       </div>
       
     </Fragment>

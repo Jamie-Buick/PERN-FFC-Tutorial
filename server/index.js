@@ -69,7 +69,7 @@ app.put("/todos/:id", async (req, res) => {
         const {id} = req.params;
         const {description} = req.body;
         const updateToDo = await db.query(
-            "UPDATE todo SET description=$1 where WHERE todo_id=$2", 
+            "UPDATE todo SET description=$1 WHERE todo_id=$2", 
             [description, id]
         );
 

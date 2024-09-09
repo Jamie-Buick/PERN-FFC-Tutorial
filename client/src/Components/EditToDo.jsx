@@ -16,8 +16,8 @@ const EditToDo = ( { todo } ) => {
                 headers : {"Content-Type" : "application/json"},
                 body: JSON.stringify(body)
             });
-            
-            window.location = "/";
+           // console.log("Edit ok");
+           window.location = "/";
         } 
         catch(err) 
         {
@@ -33,7 +33,8 @@ const EditToDo = ( { todo } ) => {
             type="button" 
             className="btn btn-warning" 
             data-bs-toggle="modal" 
-            data-bs-target={`#id${todo.todo_id}`}>
+            data-bs-target={`#id${todo.todo_id}`}
+            onClick={() => console.log('Edit button clicked')}>
             Edit
         </button>
 

@@ -119,7 +119,7 @@ public/
 build/Release
 
 # dotenv environment variables file
-.env
+server/.env
 
 # gatsby files
 .cache/

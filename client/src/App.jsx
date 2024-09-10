@@ -1,6 +1,7 @@
 import './App.css';
 import React, { Fragment } from 'react';
 import {Routes, Route} from 'react-router-dom';
+import axios from 'axios';
 
 
 // Pages
@@ -17,7 +18,8 @@ import Navbar from './Components/Navbar';
 
 
 
-
+axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.withCredentials = true;
 
 function App() {
   return (

@@ -1,20 +1,26 @@
 import express from "express";
+import dotenv from "dotenv";
 import cors from "cors";
-import db from "./db.js";
+import db from "./db.js"; // Assuming db.js exports your database connection
+import router from './routes/authRoutes.js';  // Make sure this path is correct
 
+// Load environment variables from the .env file
+dotenv.config();
 
 const app = express();
 app.use(express.json()); // This middleware is necessary to parse JSON bodies
 
-
-
-//middleware
+// Middleware
 app.use(cors());
+app.use('/', router); // Use the routes from authRoutes.js
+
+
+
 
 //ROUTES//
 
 //create a todo
-
+/* 
 app.post("/todos", async(req, res) => {
     try 
     {
@@ -99,7 +105,7 @@ app.delete("/todos/:id" , async(req,res) => {
         console.error(err.message);
     }
 
-});
+}); */
 
 
 app.listen(5000,() => {

@@ -15,6 +15,17 @@ app.use(cors());
 app.use('/', router); // Use the routes from authRoutes.js
 
 
+//DB connection
+try 
+{
+    db.connect();
+    console.log("Connected to the database successfully");
+}
+catch (err)
+{
+    console.error("Failed to connect to the database:", err);
+}
+
 
 
 //ROUTES//

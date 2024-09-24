@@ -2,6 +2,7 @@ import './App.css';
 import React, { Fragment } from 'react';
 import {Routes, Route} from 'react-router-dom';
 import axios from 'axios';
+import {Toaster} from 'react-hot-toast';
 
 
 // Pages
@@ -25,6 +26,7 @@ function App() {
   return (
     <>
       <Navbar />
+      <Toaster position='bottom-right' toastOptions={{duraction: 2000}}  />
 
       <Routes>
      

@@ -7,24 +7,23 @@ import router from './routes/authRoutes.js';  // Make sure this path is correct
 // Load environment variables from the .env file
 dotenv.config();
 
+// DB connection
+db.connect()
+  .then(() => console.log("Connected to the database successfully!!!"))
+  .catch((err) => console.error("Failed to connect to the database:", err));
+
 const app = express();
-app.use(express.json()); // This middleware is necessary to parse JSON bodies
 
 // Middleware
-app.use(cors());
-app.use('/', router); // Use the routes from authRoutes.js
+app.use(express.json()); // This middleware is necessary to parse JSON bodies
+app.use(cors({
+  origin: 'http://localhost:5173', // Allow requests from this origin
+  credentials: true, // Allow credentials (like cookies)
+}));
 
+// Use your routes
+app.use('/', router); // This should mount the routes properly
 
-//DB connection
-try 
-{
-    db.connect();
-    console.log("Connected to the database successfully");
-}
-catch (err)
-{
-    console.error("Failed to connect to the database:", err);
-}
 
 
 

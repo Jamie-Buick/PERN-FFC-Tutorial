@@ -17,9 +17,20 @@ const registerUser = async(req, res) => {
             return res.json({ error: 'Name is required' });
         }
 
-        if (!password || password.length < 6) {
-            return res.json({ error: 'Password must be at least 6 characters long' });
+        if (!password || password.length < 8) {
+            return res.json({ error: 'Password must be at least 8 characters long' });
         }
+
+        // Check for at least one uppercase letter
+        if (!/[A-Z]/.test(password)) {
+            return res.json({ error: 'Password must contain one captial letter' });       
+         }
+
+        // Check for at least one special character
+        if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+            return res.json({ error: 'Password must contain one special character' });        
+        }
+
 
         // Check if email is already used
         const checkEmail = await db.query("SELECT * FROM users WHERE email = $1", [email]);

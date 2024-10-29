@@ -41,7 +41,7 @@ const registerUser = async(req, res) => {
         }
         else // bycrpt the password if the user has not already been registered
         {
-           await bcrypt.hash(password, saltRounds, async (err, hash) => {
+            bcrypt.hash(password, saltRounds, async (err, hash) => {
                 if (err) {
                 console.error("Error hashing password:", err);
                 } else {

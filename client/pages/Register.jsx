@@ -30,7 +30,7 @@ export default function Register() {
       {
         setData({});
         toast.success('Login successful. Welcome! ');
-        navigate('/login');
+        navigate('/login'); // I need to change this navigation to the users dashboard once it is working
       }
     } 
     catch (error) {

@@ -1,8 +1,7 @@
 // Define the functions individually
 import db from '../db.js';  // Adjust the path if necessary
-import bcrypt from "bcrypt"; // bcyrpt for hashing the password entered by the user 
 
-const saltRounds = 10;
+import {hashPassword, comparePasswords} from '../helpers/auth.js'
 
 const test = (req, res) => {
     res.json('test is working');
@@ -41,20 +40,17 @@ const registerUser = async(req, res) => {
         }
         else // bycrpt the password if the user has not already been registered
         {
-            bcrypt.hash(password, saltRounds, async (err, hash) => {
-                if (err) {
-                console.error("Error hashing password:", err);
-                } else {
-               // Insert new user into database, I think I should be doing something with bcrypt before this stage 
-                const result = await db.query(
-                    "INSERT INTO users (email, password, name) VALUES ($1, $2, $3) RETURNING *",
-                    [email, hash, name]
-                );
-                const user = result.rows[0];
-                return res.json({ success: "User Registered Successfully" }); // <-- Add return here
-                }
-            });
-          }
+            const hashedPassword = await hashPassword(password);
+
+            // Insert new user into database, I think I should be doing something with bcrypt before this stage 
+            const result = await db.query(
+                "INSERT INTO users (email, password, name) VALUES ($1, $2, $3) RETURNING *",
+                [email, hashedPassword, name]
+            );
+            const user = result.rows[0];
+            return res.json({ success: "User Registered Successfully" }); // <-- Add return here
+        }
+        
     
     }
     catch (error) 

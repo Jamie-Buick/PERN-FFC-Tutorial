@@ -26,7 +26,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <Toaster position='bottom-right' toastOptions={{duraction: 2000}}  />
+      <Toaster position='bottom-right' toastOptions={{duration: 3000}}  />
 
       <Routes>
      

@@ -84,22 +84,28 @@ const loginUser = async(req,res) => {
         if (result.rows.length > 0) {
             console.log("user Found");
             const user = result.rows[0];
-            const storedHashedPassword = user.password;
-            
+            const hashedPassword = user.password;
+
+             // Check if the password match
+            const match = await comparePasswords(password, hashedPassword)
+            if(match)
+            {
+                //res.json('passwords match');
+                console.log("pass ok");
+            }
+            else
+            {
+                console.log("pass NOT ok");
+            }
+                
         }
         else
         {
-            console.log("user NAT Found");
+            console.log("user NOT Found");
 
         }
-   
 
-        // Check if the password match
-  /*       const match = await comparePasswords(password, hashed)
-        if(match)
-        {
-            res.json('passwords match');
-        } */
+    
     } 
     catch (error) 
     {

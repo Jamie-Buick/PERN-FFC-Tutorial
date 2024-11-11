@@ -72,17 +72,16 @@ const registerUser = async(req, res) => {
 const loginUser = async(req,res) => {
     try 
     {
+        //The entered information in the log in
         const {email, password} = req.body;
 
         // Check if user exists by reading my DB 
-
-
         const result = await db.query("SELECT * FROM users WHERE email = $1 ", [
             email,
         ]);
 
         if (result.rows.length > 0) {
-            console.log("user Found");
+            //console.log("user Found");
             const user = result.rows[0];
             const hashedPassword = user.password;
 
@@ -90,18 +89,22 @@ const loginUser = async(req,res) => {
             const match = await comparePasswords(password, hashedPassword)
             if(match)
             {
-                //res.json('passwords match');
-                console.log("pass ok");
+                res.json('passwords match');
+                //console.log("pass ok");
             }
-            else
+            if(!match)
             {
-                console.log("pass NOT ok");
+                res.json({
+                    error: 'The password entered is incorrect'
+                })
             }
-                
         }
         else
         {
-            console.log("user NOT Found");
+            //console.log("user NOT Found");
+            return res.json({
+                error: 'No user found'
+            })
 
         }
 

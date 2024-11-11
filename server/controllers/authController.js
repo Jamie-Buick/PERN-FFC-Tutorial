@@ -7,6 +7,8 @@ const test = (req, res) => {
     res.json('test is working');
 };
 
+
+// register end point
 const registerUser = async(req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -61,10 +63,53 @@ const registerUser = async(req, res) => {
 };
 
 
+//log in end point
+
+const loginUser = async(req,res) => {
+    try 
+    {
+        const {email, password} = req.body;
+
+        // Check if user exists by reading my DB 
+
+
+        const result = await db.query("SELECT * FROM users WHERE email = $1 ", [
+            email,
+        ]);
+
+        if (result.rows.length > 0) {
+            console.log("user Found");
+            const user = result.rows[0];
+            const storedHashedPassword = user.password;
+            
+        }
+        else
+        {
+            console.log("user NAT Found");
+
+        }
+   
+
+        // Check if the password match
+  /*       const match = await comparePasswords(password, hashed)
+        if(match)
+        {
+            res.json('passwords match');
+        } */
+    } 
+    catch (error) 
+    {
+        console.log(error);
+    }
+
+}
+
+
 
 // Export them all at once as named exports
 
 export {
     test,
-    registerUser
+    registerUser,
+    loginUser
 };

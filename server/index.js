@@ -3,6 +3,14 @@ import dotenv from "dotenv";
 import cors from "cors";
 import db from "./db.js"; // Assuming db.js exports your database connection
 import router from './routes/authRoutes.js';  // Make sure this path is correct
+import passport from './middleware/passport.js';
+import cookieParser from "cookie-parser";
+import session from "express-session";
+
+
+
+
+
 
 // Load environment variables from the .env file
 dotenv.config();
@@ -16,10 +24,27 @@ const app = express();
 
 // Middleware
 app.use(express.json()); // This middleware is necessary to parse JSON bodies
+
 app.use(cors({
   origin: 'http://localhost:5173', // Allow requests from this origin
   credentials: true, // Allow credentials (like cookies)
 }));
+
+// Session Middleware (Must come before passport.session())
+app.use(session({
+    secret: process.env.SESSION_SECRET || '1234', // Replace with your own secret
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false } // Set to true in production with HTTPS
+}));
+
+
+// Add Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(cookieParser());
+app.use(express.urlencoded({extended: false}));
 
 // Use your routes
 app.use('/', router); // This should mount the routes properly

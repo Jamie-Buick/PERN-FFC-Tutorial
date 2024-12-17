@@ -74,7 +74,7 @@ const loginUser = (req, res, next) => {
     // Passport's local strategy will handle authentication
     passport.authenticate('local', (err, user, info) => {
         if (err) return next(err);
-        if (!user) return res.status(401).json({ error: info.message || 'Login failed' });
+        if (!user) return res.status(401).json({ error: 'User Not Found!' });
 
         req.logIn(user, (err) => {
             if (err) return next(err);
